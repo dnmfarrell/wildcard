@@ -2,9 +2,9 @@
 
 Prolog DCG to match string patterns. Supports:
 
-- `*` matches any pattern including the empty string.
-- `?` matches any single character.
-- `\` escapes `*` and `?` for a literal match.
+- `*` wildcard: matches any pattern including the empty string.
+- `?` placeholder: matches any single atom.
+- `\` escape: turns `*` and `?` into literal tokens.
 
 N.B. this module intentionally does not verify its arguments are strings - additional clauses can be added to restrict the generated characters (examples below).
 
