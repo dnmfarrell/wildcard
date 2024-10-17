@@ -33,11 +33,11 @@ patt([])     --> [].
 patt([C|Cs]) -->
   wildcard([C|Cs]) | placeholder([C|Cs]) | escape([C|Cs]) | regular([C|Cs]).
 
-wildcard(['*'|Cs]) --> word([]), patt(Cs).
+wildcard([*|Cs]) --> word([]), patt(Cs).
 
-placeholder(['?'|Cs]) --> [_], patt(Cs).
+placeholder([?|Cs]) --> [_], patt(Cs).
 
-escape(['\\'|Cs]) --> same(Cs).
+escape([\|Cs]) --> same(Cs).
 
 regular([C|Cs]) --> [C], patt(Cs).
 
