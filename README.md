@@ -4,7 +4,7 @@ Prolog DCG to match string patterns. Supports:
 
 - `*` wildcard: matches any pattern including the empty string.
 - `?` placeholder: matches any single atom.
-- `\` escape: turns `*` and `?` into literal tokens.
+- `\` escape: turns `*`, `?` and `\` into literal tokens.
 
 N.B. this module intentionally does not verify its arguments are strings - additional clauses can be added to restrict the generated characters (examples below).
 
@@ -50,9 +50,7 @@ Limit the search space for wildcard patterns by length:
 
 ## Testing
 
-    $ scryer-prolog -v
-    126d7bb-modified
-    $ scryer-prolog test/wildcard.pl
+    $ scryer-prolog -f test/wildcard.pl
     Running test "a-ab"
     Running test "A-a"
     Running test "aB-ab"
@@ -82,6 +80,5 @@ Limit the search space for wildcard patterns by length:
     Running test "\?\?-??"
     Running test "\*-*"
     Running test "\*\*-**"
-
-
-
+    Running test "\A-A"
+    Running test "\A-\A"

@@ -29,22 +29,29 @@
 :- use_module(library(dcgs)).
 
 % match a list to pattern list.
-patt([])     --> [].
+patt([]) --> [].
+
 patt([C|Cs]) -->
-  wildcard([C|Cs]) | placeholder([C|Cs]) | escape([C|Cs]) | regular([C|Cs]).
+  wildcard([C|Cs])
+  | placeholder([C|Cs])
+  | escape([C|Cs])
+  | regular([C|Cs]).
 
-wildcard([*|Cs]) --> word([]), patt(Cs).
+wildcard([*|Cs]) -->
+  word([]),
+  patt(Cs).
 
-placeholder([?|Cs]) --> [_], patt(Cs).
+placeholder([?|Cs]) --> [_],
+  patt(Cs).
 
-escape([\|Cs]) --> same(Cs).
+escape([\|Cs]) --> escape_char(Cs).
+escape_char([*|Cs]) --> [*], patt(Cs).
+escape_char([?|Cs]) --> [?], patt(Cs).
+escape_char([\|Cs]) --> [\], patt(Cs).
 
-regular([C|Cs]) --> [C], patt(Cs).
+regular([C|Cs]) --> [C],
+  patt(Cs).
 
-% matches any two identical list heads.
-same([])     --> [].
-same([C|Cs]) --> [C], patt(Cs).
-
-% matches any list with an empty list.
+word([]) --> [_],
+  word([]).
 word([]) --> [].
-word([]) --> [_], word([]).

@@ -32,9 +32,11 @@ test("?*-abcde",(phrase(patt("?*"), "abcde"))).
 test("?*-a",    (phrase(patt("?*"), "a"))).
 
 test("\\?-?",    (phrase(patt("\\?"), "?"))).
-test("\\?\\?-??", (phrase(patt("\\?\\?"), "??"))).
+test("\\?\\?-??",(phrase(patt("\\?\\?"), "??"))).
 test("\\*-*",    (phrase(patt("\\*"), "*"))).
-test("\\*\\*-**", (phrase(patt("\\*\\*"), "**"))).
+test("\\*\\*-**",(phrase(patt("\\*\\*"), "**"))).
+test("\\A-A",    (\+ phrase(patt("\\A"), "A"))).
+test("\\A-\\A",  (phrase(patt("\\A"), "\\A"))).
 
 main :-
   findall(test(Name, Goal), test(Name, Goal), Tests),
